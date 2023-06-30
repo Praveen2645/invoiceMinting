@@ -45,10 +45,11 @@ contract NFTContract is ERC721URIStorage, Ownable {
     mapping(address => Investor) public investorsDetail;
     mapping(uint256 => uint256) public idToIndex;
 
-    function mint(string memory _tokenURI) external onlyOwner {
+    function mint(string memory _tokenURI) external onlyOwner returns(uint){
         tokenId++;
         _mint(msg.sender, tokenId);
         _setTokenURI(tokenId, _tokenURI);
+        return tokenId;
     }
 
     function depositCollateral(
@@ -108,4 +109,5 @@ contract NFTContract is ERC721URIStorage, Ownable {
     function getAllNfts() external view returns(AllNfts memory) {
         return allNfts;
     }
+    
 }
